@@ -28,4 +28,29 @@ class RomanToIntegerTest {
         assertEquals(400, romanToInteger.romanReader("CD"));
         assertEquals(900, romanToInteger.romanReader("CM"));
     }
+
+    @Test
+    void singleLetterTest(){
+        assertEquals(1, romanToInteger.romanToInt("I"));
+    }
+
+    @Test
+    void multipleDifferentLettersTest(){
+        assertEquals(4, romanToInteger.romanToInt("IV"));
+    }
+
+    @Test
+    void multipleSameLettersTest(){
+        assertEquals(3, romanToInteger.romanToInt("III"));
+    }
+
+    @Test
+    void multipleDifferentLettersTest2(){
+        assertEquals(58, romanToInteger.romanToInt("LVIII"));
+    }
+
+    @Test
+    void multipleDifferentLettersTest3(){
+        assertEquals(1994, romanToInteger.romanToInt("MCMXCIV"));
+    }
 }

@@ -1,13 +1,40 @@
 package com.florebencia.filsaime;
 
 public class RomanToInteger {
-    public static void main(String[] args) {
-        String toSolve = "";
-        System.out.println("This is the number value of " + toSolve + ": " + romanToInt(toSolve));
-    }
+    public int romanToInt(String s) {
+        int solution = 0;
+        String prevLetter = "";
+        int prevValue = 0;
 
-    public static int romanToInt(String s) {
-        return 0;
+        // can I use substrings????
+        if (s.length() == 1){
+            return romanReader(s);
+        }
+
+        for (int i = 0; i < s.length(); i++){
+            String currentLetter = (i == (s.length() - 1)) ? s.substring(i) : s.substring(i, i + 1);
+            if (currentLetter.equals(prevLetter)){
+                int value = romanReader(currentLetter);
+                solution += value;
+                prevValue = value;
+                prevLetter = currentLetter;
+            } else {
+                // remember you can concatenate two strings to make a new one
+                int value = romanReader(prevLetter + currentLetter);
+                if (value != 0){
+                    solution -= prevValue;
+                    solution += value;
+                    prevValue = value;
+                    prevLetter = currentLetter;
+                } else {
+                    value = romanReader(currentLetter);
+                    solution += value;
+                    prevValue = value;
+                    prevLetter = currentLetter;
+                }
+            }
+        }
+        return solution;
     }
 
     // this reads the roman letters and turns them into integers
