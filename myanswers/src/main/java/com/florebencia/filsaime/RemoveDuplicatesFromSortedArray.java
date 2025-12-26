@@ -2,7 +2,7 @@ package com.florebencia.filsaime;
 
 public class RemoveDuplicatesFromSortedArray {
     public int removeDuplicates(int[] nums) {
-        // there's something wrong with this
+
         int prevValue = nums[0];
         int lastIndex = 1;
         for (int i = 1; i < nums.length; i++) {
