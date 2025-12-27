@@ -1,20 +1,27 @@
 package com.florebencia.filsaime;
 
-import com.florebencia.filsaime.implement.BinarySearchTree;
+
+import com.florebencia.filsaime.implement.Graph;
 
 public class Main {
     public static void main(String[] args) {
-        // order of binary search tree
-        BinarySearchTree bst = new BinarySearchTree();
-        bst.insert(9);
-        bst.insert(4);
-        bst.insert(20);
-        bst.insert(1);
-        bst.insert(6);
-        bst.insert(15);
-        bst.insert(170);
-//                9
-//        4              20
-//    1        6      15      170
+        Graph graph = new Graph();
+        graph.addVertex(0);
+        graph.addVertex(1);
+        graph.addVertex(2);
+        graph.addVertex(3);
+        graph.addVertex(4);
+        graph.addVertex(5);
+        graph.addVertex(6);
+        graph.addEdge(3, 1);
+        graph.addEdge(3, 4);
+        graph.addEdge(4, 2);
+        graph.addEdge(4, 5);
+        graph.addEdge(1, 2);
+        graph.addEdge(1, 0);
+        graph.addEdge(0, 2);
+        graph.addEdge(6, 5);
+
+        graph.showConnections();
     }
 }

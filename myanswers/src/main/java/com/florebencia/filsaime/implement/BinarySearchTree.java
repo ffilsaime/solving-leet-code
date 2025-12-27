@@ -3,7 +3,11 @@ package com.florebencia.filsaime.implement;
 public class BinarySearchTree {
     private int length =  0;
     private Node root;
-    public BinarySearchTree() {}
+    public BinarySearchTree() {
+        //                9
+        //        4              20
+        //    1        6      15      170
+    }
 
     public class Node  {
         int val;
