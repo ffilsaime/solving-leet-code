@@ -14,7 +14,7 @@ public class AddTwoNumbersTest {
         ListNode head = new ListNode(2, element2);
 
         long answer = addTwoNumbers.getLinkedListValue(head);
-        Assertions.assertEquals(432, answer);
+        Assertions.assertEquals(432L, answer);
     }
 
     @Test

@@ -15,18 +15,17 @@ import com.florebencia.filsaime.implement.ListNode;
 public class AddTwoNumbers {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        // todo change all ints into a long
-        int l1Value = getLinkedListValue(l1);
-        int l2Value = getLinkedListValue(l2);
-        int solution = l1Value + l2Value;
+        long l1Value = getLinkedListValue(l1);
+        long l2Value = getLinkedListValue(l2);
+        long solution = l1Value + l2Value;
 
         //need to figure out a better way of getting each digit
-        int divisor = 10;
-        int prevDivisor = 1;
-        int quotient = 0;
+        long divisor = 10;
+        long prevDivisor = 1;
+        long quotient = 0;
 
         quotient = (solution % divisor);
-        ListNode head = new ListNode(quotient);
+        ListNode head = new ListNode(Long.valueOf(quotient).intValue());
         ListNode tail = head;
 
         prevDivisor *= 10;
@@ -34,7 +33,7 @@ public class AddTwoNumbers {
 
         while ((solution / prevDivisor) != 0){
             quotient = (solution % divisor) / prevDivisor;
-            ListNode temp = new ListNode(quotient);
+            ListNode temp = new ListNode(Long.valueOf(quotient).intValue());
             tail.next = temp;
             tail = temp;
             prevDivisor *= 10;
@@ -44,12 +43,13 @@ public class AddTwoNumbers {
         return head;
     }
 
-    public int getLinkedListValue (ListNode test){
-        int solution = 0;
-        int multiplier = 1;
+    public long getLinkedListValue (ListNode test){
+        long solution = 0;
+        long multiplier = 1;
         ListNode nextNode = test;
         while (nextNode != null){
-            solution = solution + (nextNode.val * multiplier);
+            long value = nextNode.val;
+            solution = solution + (value * multiplier);
             nextNode = nextNode.next;
             multiplier *= 10;
         }
