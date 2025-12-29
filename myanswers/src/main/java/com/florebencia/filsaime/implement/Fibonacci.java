@@ -1,0 +1,48 @@
+package com.florebencia.filsaime.implement;
+
+/**
+ * Given a number N return the index value of the Fibonacci sequence, where the sequence is:
+ * 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144
+ * the pattern of the sequence is that each value is the sum of the 2 previous values, that means that
+ * for n = 5, 2 + 3
+ */
+public class Fibonacci {
+
+    public int getValueIterative(int n){
+        //NOTE: return the nth term of the sequence
+        // I am assuming there is no Oth term
+        int[] startingArray = {0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144};
+        int prevInt = 1;
+        int prevPrevInt = 1;
+        int solution = 0;
+        if (n == 1) return 0;
+
+        if (n == 2) return 1;
+
+        if (n == 3) return 1;
+
+        for (int i = 4; i <= n; i++){
+            solution = prevInt + prevPrevInt;
+            prevPrevInt = prevInt;
+            prevInt = solution;
+        }
+
+        return solution;
+    }
+
+    public int getValueRecursive(int n){
+        //NOTE: return the nth term of the sequence
+        // I am assuming there is no Oth term
+        // write base case(s)
+        if (n == 1) {
+            return 0;
+        } else if(n == 2) {
+            return 1;
+        } else if (n == 3) {
+            return 1;
+        }
+
+        // write recursive case
+        return getValueRecursive(n-1) + getValueRecursive(n-2);
+    }
+}
