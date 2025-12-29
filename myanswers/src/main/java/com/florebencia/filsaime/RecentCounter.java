@@ -1,11 +1,10 @@
-package com.florebencia.filsaime.implement;
+package com.florebencia.filsaime;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
 
 /**
  * url of the question: https://leetcode.com/problems/number-of-recent-calls/description/?envType=problem-list-v2&envId=queue
- *
  * Your RecentCounter object will be instantiated and called as such:
  * RecentCounter obj = new RecentCounter();
  * int param_1 = obj.ping(t);
@@ -21,6 +20,8 @@ public class RecentCounter {
     }
 
     public int ping(int t) {
+        //todo need to make this faster
+
         // requests can't be negative
         // add pings to the the Queue
         // you will probably have to pop what ever numbers don't fit in the range
