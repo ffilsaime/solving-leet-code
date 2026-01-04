@@ -50,13 +50,13 @@ public class MergeSort {
         //System.out.println("Left Index: " + leftIndex + ". Right Index: " + rightIndex);
 
         // last two if statements checks for leftover elements missed
-        if (leftIndex < left.length && left.length >= right.length) {
+        if (leftIndex < left.length) {
             for (int i = leftIndex; i < left.length; i++) {
                 result[index] = left[i];
                 index++;
             }
         }
-        if (rightIndex < right.length && right.length >= left.length) {
+        if (rightIndex < right.length) {
             for (int i = rightIndex; i < right.length; i++) {
                 result[index] = right[i];
                 index++;

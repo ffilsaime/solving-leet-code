@@ -60,4 +60,17 @@ class MergeSortTest {
         Assertions.assertEquals(99, result[9]);
         Assertions.assertEquals(283, result[10]);
     }
+
+    @Test
+    void sortTest2(){
+        MergeSort ms = new MergeSort();
+        int[] arr = {2, 1, 5, 63, 283, 0};
+        int[] result = ms.sort(arr);
+        Assertions.assertEquals(0, result[0]);
+        Assertions.assertEquals(1, result[1]);
+        Assertions.assertEquals(2, result[2]);
+        Assertions.assertEquals(5, result[3]);
+        Assertions.assertEquals(63, result[4]);
+        Assertions.assertEquals(283, result[5]);
+    }
 }
