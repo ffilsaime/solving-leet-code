@@ -201,4 +201,61 @@ public class BinarySearchTree {
     public Node getRoot() {
         return root;
     }
+
+    public List<Integer> dFSInOrder(){
+        // this is just review I didn't implement this myself
+        return traversInOrder(this.root, new ArrayList<>());
+    }
+
+    private List<Integer> traversInOrder(Node node, ArrayList<Integer> list) {
+        if (node.left != null) {
+            traversInOrder(node.left, list);
+        }
+
+        list.add(node.val);
+
+        if (node.right != null) {
+            traversInOrder(node.right, list);
+        }
+
+        System.out.println("This is DFS in order: " + list);
+        return list;
+    }
+
+    public List<Integer> dFSPostOrder(){
+        // this is just review I didn't implement this myself
+        return traversPostOrder(this.root, new ArrayList<>());
+    }
+
+    private List<Integer> traversPostOrder(Node node, ArrayList<Integer> list) {
+        if (node.left != null) {
+            traversPostOrder(node.left, list);
+        }
+
+        if (node.right != null) {
+            traversPostOrder(node.right, list);
+        }
+
+        list.add(node.val);
+        return list;
+    }
+
+    public List<Integer> dFSPreOrder(){
+        // this is just review I didn't implement this myself
+        return traversPreOrder(this.root, new ArrayList<>());
+    }
+
+    private List<Integer> traversPreOrder(Node node, ArrayList<Integer> list) {
+        list.add(node.val);
+
+        if (node.left != null) {
+            traversPreOrder(node.left, list);
+        }
+
+        if (node.right != null) {
+            traversPreOrder(node.right, list);
+        }
+
+        return list;
+    }
 }
