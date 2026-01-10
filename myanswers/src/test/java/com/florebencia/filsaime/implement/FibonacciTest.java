@@ -32,4 +32,11 @@ class FibonacciTest {
         int answer = fibonacci.getValueRecursive(8);
         Assertions.assertEquals(13, answer);
     }
+
+    @Test
+    void getValueDynamicProgramTest(){
+        Fibonacci fibonacci = new Fibonacci();
+        int value = fibonacci.getValue(10);
+        Assertions.assertEquals(55, value);
+    }
 }
