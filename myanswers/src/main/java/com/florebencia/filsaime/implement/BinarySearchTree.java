@@ -207,7 +207,7 @@ public class BinarySearchTree {
         return traversInOrder(this.root, new ArrayList<>());
     }
 
-    private List<Integer> traversInOrder(Node node, ArrayList<Integer> list) {
+    private List<Integer> traversInOrder(Node node, List<Integer> list) {
         if (node.left != null) {
             traversInOrder(node.left, list);
         }
@@ -227,7 +227,7 @@ public class BinarySearchTree {
         return traversPostOrder(this.root, new ArrayList<>());
     }
 
-    private List<Integer> traversPostOrder(Node node, ArrayList<Integer> list) {
+    private List<Integer> traversPostOrder(Node node, List<Integer> list) {
         if (node.left != null) {
             traversPostOrder(node.left, list);
         }
@@ -245,7 +245,7 @@ public class BinarySearchTree {
         return traversPreOrder(this.root, new ArrayList<>());
     }
 
-    private List<Integer> traversPreOrder(Node node, ArrayList<Integer> list) {
+    private List<Integer> traversPreOrder(Node node, List<Integer> list) {
         list.add(node.val);
 
         if (node.left != null) {
