@@ -12,48 +12,57 @@ import com.florebencia.filsaime.implement.ListNode;
  *     ListNode(int val, ListNode next) { this.val = val; this.next = next; }
  * }
  */
+//leet code problem: https://leetcode.com/problems/add-two-numbers/
 public class AddTwoNumbers {
 
     public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
-        long l1Value = getLinkedListValue(l1);
-        long l2Value = getLinkedListValue(l2);
-        long solution = l1Value + l2Value;
+        // add the numbers as you go and have a carry to keep track
+        //doing the first value
+        int sum = l1.val + l2.val;
+        ListNode head = new ListNode(sum % 10, null);
+        int carry = sum / 10;
+        ListNode pointer = head;
+        l1 = l1.next;
+        l2 = l2.next;
 
-        //need to figure out a better way of getting each digit
-        long divisor = 10;
-        long prevDivisor = 1;
-        long quotient = 0;
+        while (l1 != null && l2 != null){
+            sum = l1.val + l2.val + carry;
+            ListNode newNode = new ListNode(sum % 10, null);
+            pointer.next = newNode;
+            pointer = pointer.next;
+            carry = sum / 10;
+            l1 = l1.next;
+            l2 = l2.next;
+        }
 
-        quotient = (solution % divisor);
-        ListNode head = new ListNode(Long.valueOf(quotient).intValue());
-        ListNode tail = head;
+        // just in case the left list is greater than the right
+        // and make sure to use the carry
+        while(l1 != null){
+            sum = carry + l1.val;
+            ListNode newNode = new ListNode(sum % 10, null);
+            pointer.next = newNode;
+            pointer = pointer.next;
+            carry = sum / 10;
+            l1 = l1.next;
+        }
 
-        prevDivisor *= 10;
-        divisor *= 10;
+        // just in case the right list is bigger than the left
+        // and make sure to use the carry
+        while(l2 != null){
+            sum = carry + l2.val;
+            ListNode newNode = new ListNode(sum % 10, null);
+            pointer.next = newNode;
+            pointer = pointer.next;
+            carry = sum / 10;
+            l2 = l2.next;
+        }
 
-        while ((solution / prevDivisor) != 0){
-            quotient = (solution % divisor) / prevDivisor;
-            ListNode temp = new ListNode(Long.valueOf(quotient).intValue());
-            tail.next = temp;
-            tail = temp;
-            prevDivisor *= 10;
-            divisor *= 10;
+        // don't forget about the carry
+        if (carry == 1) {
+            ListNode newNode = new ListNode(1, null);
+            pointer.next = newNode;
         }
 
         return head;
-    }
-
-    public long getLinkedListValue (ListNode test){
-        long solution = 0;
-        long multiplier = 1;
-        ListNode nextNode = test;
-        while (nextNode != null){
-            long value = nextNode.val;
-            solution = solution + (value * multiplier);
-            nextNode = nextNode.next;
-            multiplier *= 10;
-        }
-
-        return solution;
     }
 }
