@@ -1,6 +1,8 @@
 package com.florebencia.filsaime;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -55,4 +57,21 @@ public class OtherProblems {
 
         return solution;
     }
+
+    //for leetcode problem: https://leetcode.com/problems/fizz-buzz/description/
+    public List<String> fizzBuzz(int n) {
+        List<String> solution = new ArrayList<>();
+        for (int i = 1; i < n + 1; i++){
+            solution.add(returnAnswerString(i));
+        }
+        return solution;
+    }
+
+    private String returnAnswerString(int i){
+        if (i % 3 == 0 && i % 5 == 0) return "FizzBuzz";
+        else if (i % 3 == 0) return "Fizz";
+        else if (i % 5 == 0) return "Buzz";
+        else return String.valueOf(i);
+    }
+    // end of leetcode problem Fizz Buzz
 }
