@@ -32,4 +32,27 @@ public class OtherProblems {
 
         return true;
     }
+
+    //for leetcode problem: https://leetcode.com/problems/find-occurrences-of-an-element-in-an-array/description/
+    public int[] occurrencesOfElement(int[] nums, int[] queries, int x) {
+        // use a hashmap for this
+        Map<Integer, Integer> tracker = new HashMap<>();
+        // the key is the occurance and the value is which index it's found
+
+        int occurances = 0;
+        for (int i = 0; i < nums.length; i++){
+            if (nums[i] == x){
+                occurances += 1;
+                tracker.put(occurances, i);
+            }
+        }
+
+        int[] solution = new int[queries.length];
+        for (int i = 0; i < queries.length; i++){
+            int index = tracker.getOrDefault(queries[i], -1);
+            solution[i] = index;
+        }
+
+        return solution;
+    }
 }
