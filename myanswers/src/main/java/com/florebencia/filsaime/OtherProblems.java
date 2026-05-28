@@ -74,4 +74,29 @@ public class OtherProblems {
         else return String.valueOf(i);
     }
     // end of leetcode problem Fizz Buzz
+
+    //for leetcode problem: https://leetcode.com/problems/slowest-key/description/
+    public char slowestKey(int[] releaseTimes, String keysPressed) {
+        // when a new key is pressed it means the previous one was released
+        //treat the string as a charArray
+
+        if (releaseTimes.length == 1){
+            return keysPressed.charAt(0);
+        }
+
+        int maxDuration = releaseTimes[0];
+        char pressed = keysPressed.charAt(0);
+        for (int i = 1; i < releaseTimes.length; i++){
+            int duration = releaseTimes[i] - releaseTimes[i - 1];
+            char newPressed = keysPressed.charAt(i);
+            if (duration > maxDuration){
+                pressed = newPressed;
+                maxDuration = duration;
+            } else if (duration == maxDuration && pressed < newPressed){
+                pressed = newPressed;
+            }
+        }
+
+        return pressed;
+    }
 }
