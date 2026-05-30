@@ -1,9 +1,6 @@
 package com.florebencia.filsaime;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * This class is for the leet code problems that have too long of a name
@@ -98,5 +95,22 @@ public class OtherProblems {
         }
 
         return pressed;
+    }
+
+    //for leetcode problem: https://leetcode.com/problems/kth-largest-element-in-an-array/description/
+    public int findKthLargest(int[] nums, int k) {
+        // it's one of the slower algos but I should come back to this and maybe I can maket this faster?
+        // use a PriorityQueue and pop k amount of times?
+        Queue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
+
+        for (Integer elem : nums){
+            queue.add(elem);
+        }
+
+        for (int i = 0; i < k - 1; i++){
+            queue.poll();
+        }
+
+        return queue.peek();
     }
 }
