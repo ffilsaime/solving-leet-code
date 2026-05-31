@@ -1,5 +1,8 @@
 package com.florebencia.filsaime;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class DFSProblems {
     private int max = 0;
 
@@ -58,6 +61,34 @@ public class DFSProblems {
         boolean path2 = dfs(node.right, target, sum + node.val);
 
         return path || path2;
+    }
+    // end of leetcode problem
+
+    // for leetcode problem: https://leetcode.com/problems/flood-fill/description/
+    public int[][] floodFill(int[][] image, int sr, int sc, int color) {
+        Set<String> visited = new HashSet<>();
+        int[][] directions = {{0,1}, {1,0}, {0, -1}, {-1, 0}};
+        int dColor = image[sr][sc];
+        if (dColor != color){
+            dfs(image, sr, sc, color, visited, dColor, directions);
+        }
+        return image;
+    }
+
+    private void dfs(int[][] image, int r, int c, int color, Set<String> visited, int defaultColor, int[][] directions){
+        if (visited.contains(r + "," + c)) return;
+        if (r < 0 || r >= image.length) return;
+        if (c < 0 || c >= image[0].length) return;
+
+        // we should be somewhere on the grid still
+        if (image[r][c] != defaultColor) return;
+
+        image[r][c] = color;
+        visited.add(r + "," + c);
+
+        for (int[] d: directions){
+            dfs(image, r + d[0], c + d[1], color, visited, defaultColor, directions);
+        }
     }
     // end of leetcode problem
 }
