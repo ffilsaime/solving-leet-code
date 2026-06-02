@@ -113,4 +113,31 @@ public class OtherProblems {
 
         return queue.peek();
     }
+
+    //for leetcode problem: https://leetcode.com/problems/intersection-of-two-arrays/description/
+    public int[] intersection(int[] nums1, int[] nums2) {
+        List<Integer> list = new ArrayList<>();
+        //Set<Integer> tracker = new HashSet<>();
+        Map<Integer, Boolean> tracker = new HashMap<>();
+
+        for(Integer num: nums1){
+            tracker.put(num, false);
+        }
+
+        for(Integer num: nums2){
+            if (tracker.containsKey(num)){
+                if (!tracker.get(num)){
+                    list.add(num);
+                    tracker.put(num, true);
+                }
+            }
+        }
+
+        int[] answer = new int[list.size()];
+        for (int i = 0; i < list.size(); i++){
+            answer[i] = list.get(i);
+        }
+
+        return answer;
+    }
 }
