@@ -140,4 +140,33 @@ public class OtherProblems {
 
         return answer;
     }
+
+    //for leetcode problem: https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array/description/
+    public int maxProduct(int[] nums) {
+        // you would multiply the highest two numbers
+        Arrays.sort(nums);
+        int end = nums.length - 1;
+        return (nums[end] - 1) * (nums[end-1] - 1);
+    }
+
+    //for leetcode problem: https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/description/
+    public int appendCharacters(String s, String t) {
+        if ((s.length() == t.length()) && (s.equals(t))){
+            return 0;
+        }
+
+        //going to iterate through source and compare
+        int tPoint = 0;
+        int sPoint = 0;
+        while (sPoint < s.length() && tPoint < t.length()) {
+            if (s.charAt(sPoint) == t.charAt(tPoint)){
+                sPoint++;
+                tPoint++;
+            } else {
+                sPoint++;
+            }
+        }
+
+        return t.length() - tPoint;
+    }
 }
