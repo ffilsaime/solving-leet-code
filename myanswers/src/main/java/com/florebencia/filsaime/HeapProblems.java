@@ -1,8 +1,6 @@
 package com.florebencia.filsaime;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.PriorityQueue;
+import java.util.*;
 
 public class HeapProblems {
 
@@ -139,5 +137,58 @@ public class HeapProblems {
         }
 
         return sorted[k - 1];
+    }
+
+    //for leetcode problem: https://leetcode.com/problems/third-maximum-number/description/
+    public int thirdMax(int[] nums) {
+        if (nums.length == 1){
+            return nums[0];
+        }
+
+        if(nums.length == 2){
+            return Math.max(nums[0], nums[1]);
+        }
+
+        //you need a min heap
+        PriorityQueue<Integer> tracker = new PriorityQueue<>();
+        Set<Integer> set = new HashSet<>();
+
+        int lastIndex = 0;
+        while (set.size() < 3 && lastIndex < nums.length){
+            //setting up the queue
+            if (!set.contains(nums[lastIndex])){
+                tracker.add(nums[lastIndex]);
+                set.add(nums[lastIndex]);
+            }
+            lastIndex++;
+        }
+
+        for(int i = lastIndex; i < nums.length; i++){
+            if(nums[i] > tracker.peek() && !set.contains(nums[i])){
+                tracker.poll();
+                tracker.add(nums[i]);
+                set.add(nums[i]);
+            }
+        }
+
+        if (tracker.size() == 3 || tracker.size() == 1){
+            return tracker.peek();
+        }
+
+        else if (tracker.size() == 2){
+            int one = tracker.poll();
+            int two = tracker.poll();
+            return Math.max(one, two);
+        }
+
+        else {
+            if (tracker.size() > 3){
+                while (tracker.size() > 3){
+                    tracker.poll();
+                }
+            }
+        }
+
+        return tracker.peek();
     }
 }
