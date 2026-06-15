@@ -191,4 +191,57 @@ public class HeapProblems {
 
         return tracker.peek();
     }
+
+    //for leetcode: https://leetcode.com/problems/top-k-frequent-elements/description/
+    class FrequencyComparator implements Comparator<int[]> {
+        //going to store the frequency at index 1
+        public int compare(int[] arr, int[] arr2){
+            int value = arr[1] - arr2[1];
+            if (value == 0){
+                return 0;
+            }else {
+                return -value;
+            }
+        }
+    }
+
+    public int[] topKFrequent(int[] nums, int k) {
+        if (nums.length == 1){
+            return nums;
+        }
+
+        Map<Integer, Integer> map = new HashMap<>();
+        PriorityQueue<int[]> tracker = new PriorityQueue<>(new FrequencyComparator());
+
+        for (Integer number: nums){
+            if(!map.containsKey(number)){
+                map.put(number, 1);
+            } else {
+                int value = map.get(number);
+                map.put(number, value + 1);
+            }
+        }
+
+        for (Map.Entry<Integer, Integer> entry: map.entrySet()){
+            int[] add = new int[2];
+            add[0] = entry.getKey();
+            add[1] = entry.getValue();
+            tracker.add(add);
+        }
+
+        int count = 1;
+        int[] solution = new int[k];
+        int index = 0;
+        while (count <= k){
+            if (!tracker.isEmpty()){
+                int[] element = tracker.poll();
+                solution[index] = element[0];
+                index++;
+                count++;
+            }
+        }
+
+        return solution;
+    }
+    // end of leetcode problem
 }
