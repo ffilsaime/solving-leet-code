@@ -103,4 +103,41 @@ public class HeapProblems {
         }
     }
     //end of leetcode problem
+
+    //for leetcode problem: https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/
+    public int kthSmallest(int[][] matrix, int k) {
+        if (matrix.length == 1){
+            return matrix[0][0];
+        }
+
+        int[] sorted = new int[matrix.length * matrix.length];
+        PriorityQueue<int[]> tracker = new PriorityQueue<>(new ArrayComparator());
+        int index = 0;
+        //start adding the first values of each row
+        for (int i = 0; i < matrix.length; i++){
+            // 0 index is the value; 1 index is the row; 2 index is the column
+            int[] start = new int[3];
+            start[0] = matrix[i][0];
+            start[1] = i;
+            start[2] = 0;
+            tracker.add(start);
+        }
+
+        while (!tracker.isEmpty()){
+            int[] lowest = tracker.poll();
+            sorted[index] = lowest[0];
+            int row = lowest[1];
+            int col = lowest[2] + 1;
+            if (col < matrix.length){
+                int[] newArr = new int[3];
+                newArr[0] = matrix[row][col];
+                newArr[1] = row;
+                newArr[2] = col;
+                tracker.add(newArr);
+            }
+            index++;
+        }
+
+        return sorted[k - 1];
+    }
 }
