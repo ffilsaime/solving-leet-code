@@ -244,4 +244,63 @@ public class HeapProblems {
         return solution;
     }
     // end of leetcode problem
+
+    //for leetcode problem: https://leetcode.com/problems/top-k-frequent-words/description
+    class WordCount {
+        private String word;
+        private int count;
+
+        public void setWord(String aWord){
+            word = aWord;
+        }
+
+        public void setCount(int newCount){
+            count = newCount;
+        }
+
+        public String getWord(){
+            return word;
+        }
+
+        public int getCount(){
+            return count;
+        }
+    }
+
+    class WordCountComparator implements Comparator<WordCount> {
+
+        public int compare(WordCount wc, WordCount wc2){
+            if (wc.getCount() == wc2.getCount()){
+                return (wc.getWord().compareTo(wc2.getWord()));
+            }
+
+            return -1 * (wc.getCount() - wc2.getCount());
+        }
+    }
+    public List<String> topKFrequent(String[] words, int k) {
+        PriorityQueue<WordCount> maxHeap = new PriorityQueue<>(new WordCountComparator());
+        Map<String, Integer> tracker = new HashMap<>();
+        for (String word: words) {
+            if (tracker.containsKey(word)){
+                tracker.put(word, tracker.get(word) + 1);
+            } else {
+                tracker.put(word, 1);
+            }
+        }
+
+        tracker.forEach((key, v) -> {
+            WordCount wordCount = new WordCount();
+            wordCount.setWord(key);
+            wordCount.setCount(v);
+            maxHeap.add(wordCount);
+        });
+
+        List<String> answer = new ArrayList<>();
+        for (int i = 0; i < k; i++){
+            answer.add(maxHeap.poll().getWord());
+        }
+
+        return answer;
+    }
+    //end of leetcode problem
 }
