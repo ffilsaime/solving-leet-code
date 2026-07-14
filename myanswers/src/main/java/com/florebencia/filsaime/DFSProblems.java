@@ -1,6 +1,8 @@
 package com.florebencia.filsaime;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class DFSProblems {
@@ -91,4 +93,48 @@ public class DFSProblems {
         }
     }
     // end of leetcode problem
+
+    //for leetcode problem: https://leetcode.com/problems/validate-binary-search-tree/description/
+    public boolean isValidBST(TreeNode root) {
+        if (root.left == null && root.right == null){
+            return true;
+        }
+
+        // List<Integer> result = dfs(root, new ArrayList<>());
+        // int prev = result.get(0);
+        // for (int i = 1; i < result.size(); i++){
+        //     if (prev >= result.get(i)){
+        //         return false;
+        //     }
+        //     prev = result.get(i);
+        // }
+
+        // return true;
+        return dfs(root, new ArrayList<>());
+    }
+
+    private boolean dfs(TreeNode node, List<Integer> list){
+        // we are doing inorder search
+        // an inorder search guarantees that everything should be sorted for a valid BST
+        boolean left = true;
+        boolean right = true;
+        if (node.left != null){
+            left = dfs(node.left, list);
+        }
+
+        if (list.isEmpty()){
+            list.add(node.val);
+        } else {
+            if (node.val <= list.get(list.size() - 1)){
+                return false;
+            }
+            list.add(node.val);
+        }
+
+        if (node.right != null){
+            right = dfs(node.right, list);
+        }
+
+        return left && right;
+    }
 }
