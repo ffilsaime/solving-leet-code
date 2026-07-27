@@ -1,5 +1,6 @@
 package com.florebencia.filsaime;
 
+import java.util.Arrays;
 import java.util.Stack;
 
 public class StackProblems {
@@ -57,4 +58,40 @@ public class StackProblems {
         return String.valueOf(newVal);
     }
     // end of leetcode problem
+
+    //for leetcode problem: https://leetcode.com/problems/simplify-path/description/
+    public String simplifyPath(String path) {
+        if (path.length() == 1){
+            return path;
+        }
+
+        Stack<String> stack = new Stack<>();
+        String[] pathSplit = path.split("/");
+
+        System.out.println("This is what pathSplit looks like: " + Arrays.toString(pathSplit));
+        for (String part: pathSplit){
+            if (part.equals("..")){
+                if (!stack.isEmpty()){
+                    stack.pop();
+                }
+                //do nothing if the stack is empty
+            } else if (!part.isEmpty() && !part.equals(".")){
+                stack.push("/" + part);
+            } else {
+                System.out.println("This was probably an extra slash: " + part);
+            }
+        }
+
+        if (stack.isEmpty()){
+            return "/";
+        }
+
+        String answer = "";
+        while (!stack.isEmpty()){
+            answer = stack.pop() + answer;
+            System.out.println("This is what answer looks like: " + answer);
+        }
+
+        return answer;
+    }
 }
