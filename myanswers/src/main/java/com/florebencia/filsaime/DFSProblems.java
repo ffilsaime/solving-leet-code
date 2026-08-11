@@ -1,9 +1,6 @@
 package com.florebencia.filsaime;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class DFSProblems {
     private int max = 0;
@@ -136,5 +133,44 @@ public class DFSProblems {
         }
 
         return left && right;
+    }
+    //end of leetcode problem
+
+    //for leetcode problem: https://leetcode.com/problems/kth-smallest-element-in-a-bst/description/
+    public int kthSmallest(TreeNode root, int k) {
+        //Use a max heap in a priorityqueue
+        //wait until the size of the queue is k
+        // if an element is smaller than the peek pop and add the new element
+        if (root.left == null & root.right == null){
+            return root.val;
+        }
+
+        PriorityQueue<Integer> queue = new PriorityQueue<>(Collections.reverseOrder());
+        dfs(root, queue, k);
+        return queue.poll();
+    }
+
+    public void dfs(TreeNode node, PriorityQueue<Integer> queue, int k){
+        // i think I went wrong by not just adding the first k numbers that I see and then doing the popping
+        if (queue.size() < k){
+            // if (queue.isEmpty()){
+            //     queue.add(node.val);
+            // } else if (node.val < queue.peek()) {
+            //     if (queue.size() == k) queue.poll();
+            //     queue.add(node.val);
+            // }
+            queue.add(node.val);
+        } else if (queue.size() == k && node.val < queue.peek()){
+            queue.poll();
+            queue.add(node.val);
+        }
+
+        if (node.left != null){
+            dfs(node.left, queue, k);
+        }
+
+        if (node.right != null){
+            dfs(node.right, queue, k);
+        }
     }
 }
