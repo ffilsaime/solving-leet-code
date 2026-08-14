@@ -94,4 +94,26 @@ public class StackProblems {
 
         return answer;
     }
+
+    //for leetcode problem: https://leetcode.com/problems/removing-stars-from-a-string/description/
+    // I used a StringBuilder like a stack
+    //todo need to make this more efficient
+    public String removeStars(String s) {
+        if (s.length() == 1){
+            if (s.equals("*")) return "";
+            return s;
+        }
+        //treat a stringbuilder like a stack
+        StringBuilder stack = new StringBuilder("");
+        for (int i = 0; i < s.length(); i++){
+            char letter = s.charAt(i);
+            if (letter == '*'){
+                int length = stack.length();
+                stack.deleteCharAt(length - 1);
+            } else {
+                stack.append(letter);
+            }
+        }
+        return stack.toString();
+    }
 }
